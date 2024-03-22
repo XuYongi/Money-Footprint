@@ -1,0 +1,13 @@
+#请在启动参数中加入--spring.profiles.active=pgsql以激活本配置文件
+database: pgsql
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/billnote
+    username: "postgres"
+    password: "xuyong"
+#    initialization-mode: always
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
