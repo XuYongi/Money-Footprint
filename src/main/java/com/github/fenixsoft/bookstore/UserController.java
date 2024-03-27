@@ -1,3 +1,5 @@
+package com.github.fenixsoft.bookstore;
+
 import com.github.fenixsoft.bookstore.applicaiton.billnote.UserService;
 import com.github.fenixsoft.bookstore.domain.billnote.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        User newUser = userService.registerUser(user.getUsername(), user.getEmail(), user.getPassword());
+        User newUser = userService.registerUser(user.getUsername(), user.getEmail(), user.getPasswordHash());
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
@@ -32,7 +34,7 @@ public class UserController {
 
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
-        User updatedUser = userService.updateUser(userId, user.getEmail(), user.getPassword());
+        User updatedUser = userService.updateUser(userId, user.getEmail(), user.getPasswordHash());
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 }

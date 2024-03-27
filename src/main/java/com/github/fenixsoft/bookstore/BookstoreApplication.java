@@ -21,11 +21,14 @@ package com.github.fenixsoft.bookstore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.github.fenixsoft.bookstore.**"})
 @EnableCaching
-@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class BookstoreApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplication.class, args);

@@ -18,13 +18,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userId;
 
     @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
 
     @Column(nullable = false, unique = true)
     private String email;

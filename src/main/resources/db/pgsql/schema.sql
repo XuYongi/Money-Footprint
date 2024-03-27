@@ -1,81 +1,42 @@
--- Drop tables if they exist
-DROP TABLE IF EXISTS specification CASCADE;
-DROP TABLE IF EXISTS advertisement CASCADE;
-DROP TABLE IF EXISTS stockpile CASCADE;
-DROP TABLE IF EXISTS payment CASCADE;
-DROP TABLE IF EXISTS wallet CASCADE;
-DROP TABLE IF EXISTS account CASCADE;
-DROP TABLE IF EXISTS product CASCADE;
+-- 创建用户表
+CREATE TABLE user (
+                      id SERIAL PRIMARY KEY, -- 用户ID，主键，自增
+                      username VARCHAR(50) NOT NULL UNIQUE, -- 用户名，非空且唯一
+                      password VARCHAR(50) NOT NULL, -- 密码，非空
+                      email VARCHAR(50) -- 邮箱，可选
+);
 
--- Create account table
-CREATE TABLE IF NOT EXISTS account
-(
-    id        SERIAL PRIMARY KEY,
-    username  VARCHAR(50),
-    password  VARCHAR(100),
-    name      VARCHAR(50),
-    avatar    VARCHAR(100),
-    telephone VARCHAR(20),
-    email     VARCHAR(100),
-    location  VARCHAR(100)
-    );
-CREATE INDEX idx_account_username ON account(username);
+-- 创建账目类型表
+CREATE TABLE account_type (
+                              id SERIAL PRIMARY KEY, -- 账目类型ID，主键，自增
+                              name VARCHAR(50) NOT NULL, -- 账目类型名称，非空
+                              user_id INTEGER NOT NULL, -- 用户ID，非空
+                              level INTEGER NOT NULL CHECK (level IN (1, 2)), -- 账目类型等级，非空，1表示一级分类，2表示二级分类
+                              parent_id INTEGER, -- 父级账目类型ID，可选，如果是一级分类则为空，如果是二级分类则填写对应的一级分类ID
+                              category INTEGER NOT NULL CHECK (category IN (0, 1)) -- 账目类型类别，非空，0表示支出，1表示收入
+);
 
--- Create wallet table
-CREATE TABLE IF NOT EXISTS wallet
-(
-    id         SERIAL PRIMARY KEY,
-    money      DECIMAL,
-    account_id INTEGER REFERENCES account(id) ON DELETE CASCADE
-    );
+-- 创建账本表
+CREATE TABLE ledger (
+                        id SERIAL PRIMARY KEY, -- 账本ID，主键，自增
+                        name VARCHAR(50) NOT NULL, -- 账本名称，非空
+                        creator_id INTEGER NOT NULL -- 创建者ID，非空
+);
 
--- Create product table
-CREATE TABLE IF NOT EXISTS product
-(
-    id          SERIAL PRIMARY KEY,
-    title       VARCHAR(50),
-    price       DECIMAL,
-    rate        FLOAT,
-    description VARCHAR(8000),
-    cover       VARCHAR(100),
-    detail      VARCHAR(100)
-    );
-CREATE INDEX idx_product_title ON product(title);
+-- 创建账本成员表
+CREATE TABLE ledger_member (
+                               ledger_id INTEGER NOT NULL, -- 账本ID，非空
+                               user_id INTEGER NOT NULL, -- 用户ID，非空
+                               PRIMARY KEY (ledger_id, user_id) -- 联合主键，由账本ID和用户ID组成
+);
 
--- Create stockpile table
-CREATE TABLE IF NOT EXISTS stockpile
-(
-    id         SERIAL PRIMARY KEY,
-    amount     INTEGER,
-    frozen     INTEGER,
-    product_id INTEGER REFERENCES product(id) ON DELETE CASCADE
-    );
-
--- Create specification table
-CREATE TABLE IF NOT EXISTS specification
-(
-    id         SERIAL PRIMARY KEY,
-    item       VARCHAR(50),
-    value      VARCHAR(100),
-    product_id INTEGER REFERENCES product(id) ON DELETE CASCADE
-    );
-
--- Create advertisement table
-CREATE TABLE IF NOT EXISTS advertisement
-(
-    id         SERIAL PRIMARY KEY,
-    image      VARCHAR(100),
-    product_id INTEGER REFERENCES product(id) ON DELETE CASCADE
-    );
-
--- Create payment table
-CREATE TABLE IF NOT EXISTS payment
-(
-    id           SERIAL PRIMARY KEY,
-    pay_id       VARCHAR(100),
-    create_time  TIMESTAMP,
-    total_price  DECIMAL,
-    expires      INTEGER NOT NULL,
-    payment_link VARCHAR(300),
-    pay_state    VARCHAR(20)
-    );
+-- 创建账单表
+CREATE TABLE bill (
+                      id SERIAL PRIMARY KEY, -- 账单ID，主键，自增
+                      amount NUMERIC(10,2) NOT NULL, -- 金额，非空，保留两位小数
+                      account_type_id INTEGER NOT NULL, -- 账目类型ID，非空
+                      ledger_id INTEGER NOT NULL, -- 账本ID，非空
+                      user_id INTEGER NOT NULL, -- 用户ID，非空
+                      date DATE NOT NULL, -- 日期，非空
+                      remark VARCHAR(200) -- 备注，可选
+);
