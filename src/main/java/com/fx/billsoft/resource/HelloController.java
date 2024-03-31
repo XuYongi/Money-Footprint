@@ -1,4 +1,4 @@
-package com.github.fenixsoft.bookstore.resource;
+package com.fx.billsoft.resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

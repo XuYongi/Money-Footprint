@@ -1,4 +1,4 @@
-package com.github.fenixsoft.bookstore;
+package com.fx.billsoft;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @Sql(scripts = {"classpath:db/hsqldb/schema.sql", "classpath:db/hsqldb/data.sql"})
-@SpringBootTest(classes = BookstoreApplication.class)
+@SpringBootTest(classes = BillApplication.class)
 public class DBRollbackBase {
 
     @Autowired
