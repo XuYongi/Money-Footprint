@@ -1,4 +1,4 @@
-database: hsqldb
+database: pgsql
 
 spring:
   datasource:

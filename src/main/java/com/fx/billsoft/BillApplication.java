@@ -22,7 +22,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
-@SpringBootApplication(scanBasePackages = {"com.github.fenixsoft.bookstore.**"})
+@SpringBootApplication(scanBasePackages = {"com.fx.billsoft.**"})
 @EnableCaching
 //@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class BillApplication {
