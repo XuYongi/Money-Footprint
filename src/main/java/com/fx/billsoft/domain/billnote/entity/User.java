@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "user_t")
-//@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

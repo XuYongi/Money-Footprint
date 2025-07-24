@@ -1,0 +1,371 @@
+{
+  "info": {
+    "name": "Ledger Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Ledger",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"我的新账本\",\n  \"creatorId\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/ledgers",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledgers"]
+        }
+      }
+    },
+    {
+      "name": "Get Ledger by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledgers/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledgers", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Ledgers by User ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledgers/user/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledgers", "user", "1"]
+        }
+      }
+    },
+    {
+      "name": "Add Member to Ledger",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ledgerId\": 1,\n  \"userId\": 2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/ledgers/1/members",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledgers", "1", "members"]
+        }
+      }
+    },
+    {
+      "name": "Get Ledger Members",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledgers/1/members",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledgers", "1", "members"]
+        }
+      }
+    },
+    {
+      "name": "Create Bill",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 100.50,\n  \"accountTypeId\": 1,\n  \"ledgerId\": 1,\n  \"userId\": 1,\n  \"date\": \"2024-01-15\",\n  \"remark\": \"午餐费用\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/bills",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "bills"]
+        }
+      }
+    },
+    {
+      "name": "Get Bill by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bills/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "bills", "1"]
+        }
+      }
+    },
+    {
+      "name": "Update Bill",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"amount\": 95.50,\n  \"accountTypeId\": 1,\n  \"ledgerId\": 1,\n  \"userId\": 1,\n  \"date\": \"2024-01-15\",\n  \"remark\": \"午餐费用打折\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/bills",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "bills"]
+        }
+      }
+    },
+    {
+      "name": "Delete Bill",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bills/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "bills", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Bills by Ledger ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bills/ledger/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "bills", "ledger", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Bills by User ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bills/user/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "bills", "user", "1"]
+        }
+      }
+    },
+    {
+      "name": "Create Account Type",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"餐饮\",\n  \"userId\": 1,\n  \"level\": 1,\n  \"parentId\": null,\n  \"category\": 0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/account-types",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "account-types"]
+        }
+      }
+    },
+    {
+      "name": "Get Account Type by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/account-types/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "account-types", "1"]
+        }
+      }
+    },
+    {
+      "name": "Update Account Type",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"name\": \"餐饮支出\",\n  \"userId\": 1,\n  \"level\": 1,\n  \"parentId\": null,\n  \"category\": 0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/account-types",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "account-types"]
+        }
+      }
+    },
+    {
+      "name": "Delete Account Type",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/account-types/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "account-types", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Account Types by User ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/account-types/user/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "account-types", "user", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Account Types by User ID and Category",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/account-types/user/1/category/0",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "account-types", "user", "1", "category", "0"]
+        }
+      }
+    },
+    {
+      "name": "Add Ledger Member",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ledgerId\": 1,\n  \"userId\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/ledger-members",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledger-members"]
+        }
+      }
+    },
+    {
+      "name": "Get Ledger Member by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledger-members/1/3",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledger-members", "1", "3"]
+        }
+      }
+    },
+    {
+      "name": "Remove Ledger Member",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledger-members/1/3",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledger-members", "1", "3"]
+        }
+      }
+    },
+    {
+      "name": "Get Ledger Members by Ledger ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledger-members/ledger/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledger-members", "ledger", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Ledger Members by User ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ledger-members/user/1",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "ledger-members", "user", "1"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "ledger_id",
+      "value": "1"
+    },
+    {
+      "key": "userId",
+      "value": "1"
+    }
+  ]
+}

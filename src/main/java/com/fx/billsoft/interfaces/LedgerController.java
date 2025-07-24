@@ -2,6 +2,8 @@ package com.fx.billsoft.interfaces;
 
 import com.fx.billsoft.application.LedgerAppService;
 import com.fx.billsoft.domain.billnote.entity.Ledger;
+import com.fx.billsoft.domain.billnote.entity.LedgerMember;
+import com.fx.billsoft.application.LedgerMemberAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +15,12 @@ import java.util.Optional;
 @RequestMapping("/api/ledgers")
 public class LedgerController {
     private final LedgerAppService ledgerAppService;
+    private final LedgerMemberAppService ledgerMemberAppService;
 
     @Autowired
-    public LedgerController(LedgerAppService ledgerAppService) {
+    public LedgerController(LedgerAppService ledgerAppService, LedgerMemberAppService ledgerMemberAppService) {
         this.ledgerAppService = ledgerAppService;
+        this.ledgerMemberAppService = ledgerMemberAppService;
     }
 
     @PostMapping
@@ -35,5 +39,19 @@ public class LedgerController {
     public ResponseEntity<List<Ledger>> getLedgersByUserId(@PathVariable Long userId) {
         List<Ledger> ledgers = ledgerAppService.getLedgersByCreatorId(userId);
         return ResponseEntity.ok(ledgers);
+    }
+
+    @PostMapping("/{ledgerId}/members")
+    public ResponseEntity<LedgerMember> addMemberToLedger(@PathVariable Long ledgerId, @RequestBody LedgerMember ledgerMember) {
+        // 确保ledgerId一致
+        ledgerMember.setLedgerId(ledgerId);
+        LedgerMember addedMember = ledgerMemberAppService.addMember(ledgerMember);
+        return ResponseEntity.ok(addedMember);
+    }
+
+    @GetMapping("/{ledgerId}/members")
+    public ResponseEntity<List<LedgerMember>> getMembersOfLedger(@PathVariable Long ledgerId) {
+        List<LedgerMember> members = ledgerMemberAppService.getMembersByLedgerId(ledgerId);
+        return ResponseEntity.ok(members);
     }
 }
