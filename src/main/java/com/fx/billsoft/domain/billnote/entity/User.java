@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +25,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(length = 50)
@@ -40,6 +42,18 @@ public class User {
 
     @Column(name = "update_user")
     private String updateUser;
+
+    // 临时字段，用于注册时接收明文密码
+    @Transient
+    private String plainPassword;
+
+    // 加密密码
+    public void encryptPassword() {
+        if (this.plainPassword != null && !this.plainPassword.isEmpty()) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            this.password = encoder.encode(this.plainPassword);
+        }
+    }
 
 //    @Column(columnDefinition = "JSONB")
 //    @Type(type = "jsonb")

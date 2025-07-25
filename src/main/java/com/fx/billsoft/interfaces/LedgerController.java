@@ -41,6 +41,13 @@ public class LedgerController {
         return ResponseEntity.ok(ledgers);
     }
 
+    // 根据成员用户ID获取账本列表
+    @GetMapping("/search/findByMembersUserId")
+    public ResponseEntity<List<Ledger>> getLedgersByMemberUserId(@RequestParam Long userId) {
+        List<Ledger> ledgers = ledgerAppService.getLedgersByMemberUserId(userId);
+        return ResponseEntity.ok(ledgers);
+    }
+
     @PostMapping("/{ledgerId}/members")
     public ResponseEntity<LedgerMember> addMemberToLedger(@PathVariable Long ledgerId, @RequestBody LedgerMember ledgerMember) {
         // 确保ledgerId一致

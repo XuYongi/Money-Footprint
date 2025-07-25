@@ -28,4 +28,8 @@ public class LedgerAppService {
     public List<Ledger> getLedgersByCreatorId(Long creatorId) {
         return ledgerService.getLedgersByCreatorId(creatorId);
     }
+
+    public List<Ledger> getLedgersByMemberUserId(Long userId) {
+        return ledgerService.getLedgersByMemberUserId(userId);
+    }
 }
